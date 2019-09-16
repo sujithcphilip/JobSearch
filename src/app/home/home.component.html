@@ -1,0 +1,188 @@
+<div class="alert alert-info alert-dismissible" *ngIf="showAlert">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    Maximum <b>5</b> items are allowed.
+</div>
+<div class="job-container">
+    <div class="search-header">
+        <div class="search-location" id="searchLocation">
+            <div>
+                <input type="text" placeholder="Location" class="location-input form-control"
+                    (click)="showLocationSelector = true" [(ngModel)]="searchInputs.location">
+            </div>
+            <div class="selected">
+                <span class="chips badge badge-light chip-location" *ngFor="let chip of searchChips.location">
+                    {{ chip }} <span (click)="locationSelector.removeOption(chip)">&times;</span>
+                </span>
+            </div>
+            <div [hidden]="!showLocationSelector">
+                <app-multiselect #locationSelector [options]="setToArray(allLocations)"
+                    (update)="searchUpdate($event, 'location')" (maxItems)="showMaxItemAlert()"
+                    [searchKey]="searchInputs.location"></app-multiselect>
+            </div>
+
+        </div>
+        <div class="search-company" id="searchCompany">
+            <div>
+                <input type="text" placeholder="Company" class="company-input form-control"
+                    (click)="showCompanySelector = true" [(ngModel)]="searchInputs.company">
+            </div>
+            <div class="selected">
+                <span class="chips badge badge-light chip-company" *ngFor="let chip of searchChips.company">
+                    {{ chip }} <span (click)="companySelector.removeOption(chip)">&times;</span>
+                </span>
+            </div>
+            <div [hidden]="!showCompanySelector">
+                <app-multiselect #companySelector [options]="setToArray(allCompanies)"
+                    (update)="searchUpdate($event, 'company')" (maxItems)="showMaxItemAlert()"
+                    [searchKey]="searchInputs.company"></app-multiselect>
+            </div>
+
+        </div>
+        <div class="search-skill" id="searchSkill">
+            <div>
+                <input type="text" placeholder="Skill" class="skill-input form-control"
+                    (click)="showSkillSelector = true" [(ngModel)]="searchInputs.skill">
+            </div>
+            <div class="selected">
+                <span class="chips badge badge-light chip-role" *ngFor="let chip of searchChips.skill">
+                    {{ chip }} <span (click)="skilSelector.removeOption(chip)">&times;</span>
+                </span>
+            </div>
+            <div [hidden]="!showSkillSelector">
+                <app-multiselect #skilSelector [options]="setToArray(allSkills)"
+                    (update)="searchUpdate($event, 'skill')" (maxItems)="showMaxItemAlert()"
+                    [searchKey]="searchInputs.skill"></app-multiselect>
+            </div>
+
+        </div>
+        <div class="search-button">
+            <button class="btn btn-primary" (click)="search()">Search</button>
+        </div>
+        <div class="sort-job" id="sortJobs">
+            <select name="sortJobs" id="sortJobs" class="form-control">
+                <option value="a">a</option>
+                <option value="b">b</option>
+                <option value="c">c</option>
+            </select>
+
+        </div>
+    </div>
+    <div class="content" *ngIf="jobSearchResult.length">
+        <div class="card" *ngFor="let job of jobSearchResult | paginate: paginationConfig;let i=index">
+            <div class="card-header">
+                <div class="company">
+                    <div class="logo" [ngStyle]="{'background-color': getColor(job._id, i)}">
+                        {{getLogo(job.companyname)}}
+                    </div>
+                    <div class="company-name">
+                        {{ (job.companyname | slice:0:40) + ((job.companyname.length > 40) ? "...":"") }}
+                    </div>
+                </div>
+
+                <div class="title">
+                    {{ (job.title | slice:0:40) + ((job.title.length > 40) ? "...":"") }}
+                </div>
+                <div class="location">
+                    {{job.location}}
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="skills" *ngIf="job.skills">
+                    {{ (job.skills | slice:0:40) + ((job.skills.length > 40) ? "...":"") }}
+                </div>
+                <div class="skills" *ngIf="!job.skills">
+                    No Skills specified.
+                </div>
+                <span class="endingJob chips chip-ending badge badge-light" *ngIf="isEnding(job.enddate).ending">
+                    ending
+                </span>
+                <span class="oldJob chips chip-old badge badge-light" *ngIf="isEnding(job.enddate).old">
+                    old
+                </span>
+            </div>
+            <div class="card-footer">
+
+                <a [href]="selectedJob?.applylink || 'https://www.linkedin.com/jobs/'" target="_blank">
+                    <div class="apply-job">
+                        Apply
+                    </div>
+                </a>
+
+                <div class="view-job" data-toggle="modal" data-target="#jobModal" (click)="selectedJob = job">
+                    View
+                </div>
+                <div class="date-created" *ngIf="job.created">
+                    {{job.created}}
+                </div>
+            </div>
+        </div>
+        <div class="pagination-div">
+            <div>
+                <pagination-controls id="jobsPagination" (pageChange)="paginationConfig.currentPage = $event"
+                    maxSize="9" directionLinks="true" autoHide="true" responsive="true" previousLabel="Prev"
+                    nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+                    screenReaderCurrentLabel="You're on page">
+                </pagination-controls>
+            </div>
+            <div>
+                ({{
+                     (((paginationConfig.currentPage || 1) - 1) * paginationConfig.itemsPerPage) + '+ of ' + paginationConfig.totalItems 
+                }})
+            </div>
+        </div>
+
+    </div>
+    <div class="content" *ngIf="!jobSearchResult.length">
+        No jobs found.
+    </div>
+
+</div>
+
+<div class="modal fade" id="jobModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <div>
+                    <h4 class="modal-title">
+                        {{ (selectedJob?.title | slice:0:60) + ((selectedJob?.title.length > 60) ? "...":"") }}</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div>
+                    {{selectedJob?.companyname}}
+                </div>
+                <div class="location">
+                    {{selectedJob?.location}}
+                </div>
+
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="skills">
+                    {{selectedJob?.skills || "No Skills Specified."}}
+                </div>
+                <hr>
+                <div class="jd">
+                    {{selectedJob?.jd || "No Job Description."}}
+                </div>
+                <hr>
+                <div class="salary">
+                    {{selectedJob?.salary || "Salary Undisclosed."}}
+                </div>
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <a [href]="selectedJob?.applylink || 'https://www.linkedin.com/jobs/'" target="_blank">
+                    <button type="button" class="btn btn-secondary">Apply</button>
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

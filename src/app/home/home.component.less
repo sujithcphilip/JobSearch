@@ -1,0 +1,252 @@
+
+.alert {
+    position:fixed; 
+    top: 0px; 
+    right: 0px;
+    margin-right: 20px; 
+    width: 25%;
+    min-width: 200px;
+    background-color: #d9edf7fd;
+    z-index:100; 
+    border-radius:5px
+}
+.search-header {
+    // max-height: 120px;
+    background-color: #00000044;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    z-index: 5;
+    display: flex;
+    min-height: 100px;
+    margin-right: 5px;
+    border-radius: 3px;
+    .search-location, .search-company, .search-skill, .search-button {
+        width: 200px;
+        padding-right: 10px;
+        input {
+            margin-right: 5px;
+        }
+        
+    }
+    select {
+        width: 200px;
+    }
+    .sort-jobs {
+        float: right;
+    }
+}
+.chips {
+    font-size: 0.75rem;
+    background-color: white;
+    padding: 3px;
+    margin: 2px;
+    border-radius: 3px;
+    span {
+        font-size: 0.8rem;
+        cursor: pointer;
+    }
+}
+.chips.chip-location {
+    color: red;
+}
+.chips.chip-company {
+    color: blue;
+}
+.chips.chip-role {
+    color:green;
+}
+.chips.chip-ending {
+    color:white;
+    background:orangered;
+    border-radius: 3px;
+}
+.chips.chip-old {
+    color:white;
+    background: red;
+    border-radius: 3px;
+}
+.card {
+    width: calc(16.66% - 5px);
+    max-width: 400px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    height: 300px;
+    float: left;
+    border: solid 1px #888888;
+    position: initial;
+    &:hover {
+        box-shadow: 0px 0px 8px #3148c5;
+    }
+    
+    .card-header {
+        min-height: 150px;
+        .company {
+            display: inline;
+            .logo {
+                width: 75px;
+                height: 75px;
+                background-color: #d8d8d8;
+                color: rgb(98, 0, 255);
+                font-weight: bold;
+                font-size: 1.25rem;
+                font-family: "Comic Sans MS", cursive, sans-serif;
+                line-height: 75px;
+                vertical-align: middle;
+                text-align: center;
+                float: left;
+                margin-right: 5px;
+            }
+            .company-name {
+                font-weight: 400;
+                font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+                overflow: hidden;
+            }
+        }
+        .title {
+            clear: both;
+            font-weight: bold;
+            font-size: 1rem;
+            overflow: hidden;
+        }
+        .location {
+            font-size: .75rem;
+            color: #505050;
+        }
+    }
+    .card-body {
+        .skills {
+            font-size: 0.75em;
+            font-weight: bold;
+            overflow: hidden;
+        }
+    }
+    .card-footer {
+        display: flex;
+        flex-direction: row-reverse;
+        div {
+            margin-left: 10px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        .view-job {
+            float: right;
+            color: #007000;
+            font-weight: bold;
+            cursor: pointer;
+            
+        }
+        .apply-job {
+            float: right;
+            color: #004ca3;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+    }
+}
+.date-created {
+    color: #505050;
+}
+
+.modal {
+    div {
+        overflow: hidden;
+    }
+    .modal-header {
+        display: initial;
+        h4 {
+            width: 90%;
+            display: initial;
+        }
+        .location {
+            font-size: 0.8rem;
+        }
+    }
+    .modal-dialog {
+        min-width: 75%;
+        min-height: 75vh;
+    }
+    .title {
+        font-weight: bold;
+    }
+    .jd {
+        
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+    .skills {
+        font-weight: bold;
+    }
+}
+
+.job-container {
+    margin-left: 50px;
+    margin-right: 50px;
+    overflow: hidden;
+    .content {
+        overflow: hidden;
+        .pagination-div {
+            clear: both;
+            display: flex;
+            background-color: white;
+            font-weight: bold;
+            margin-right: 5px;
+           
+        }
+    }
+}
+
+
+@media only screen and (max-width: 1990px) {
+    .card {
+        width: calc(25% - 5px);
+    }
+    .job-container {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    .card {
+        width: calc(33.33% - 5px);
+    }
+    .job-container {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+}
+@media only screen and (max-width: 1000px) {
+    .card {
+        width: calc(50% - 5px);
+        min-height: 300px;
+    }
+}
+@media only screen and (max-width: 900px) {
+    .card {
+        width: 100%;
+        max-width: 100%;
+        min-height: 350px;
+    }
+    .job-container {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .search-header {
+        width: 100%;
+        display: block;
+        max-height: initial;
+        div, .search-location, .search-company, .search-skill, .search-button {
+            width: 100%;
+            margin-right: 0px;
+        }   
+        
+    }
+    .pagination-div {
+        display: initial;
+       span, div {
+           clear: both;
+           width: 100%;
+       }
+    }
+}

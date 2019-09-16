@@ -3,16 +3,28 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { HomeComponent } from './home/home.component';
+import { ApisService } from './apis.service';
+import { HttpClientModule } from '@angular/common/http';
+import { MultiselectComponent } from './multiselect/multiselect.component';
+import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from "ngx-pagination";
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    MultiselectComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    NgxPaginationModule
   ],
-  providers: [],
+  providers: [
+    ApisService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
