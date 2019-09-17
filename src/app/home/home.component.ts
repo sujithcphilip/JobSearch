@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   showLocationSelector = false;
   showCompanySelector = false;
   showSkillSelector = false;
-
+  loading = false;
   alertTimeout = null;
   showAlert = false;
   searchChips: any = {
@@ -57,6 +57,7 @@ export class HomeComponent implements OnInit {
       this.jobs = this.apiService.jobs;
       this.initJobs();
     } else {
+      this.loading = true;
       let jobsApi = this.apiService.getJobsData().subscribe((res: any) => {
         this.apiService.jobs = res.data;
         this.jobs = this.apiService.jobs;
@@ -64,6 +65,7 @@ export class HomeComponent implements OnInit {
 
       }, err => {
         console.log(err);
+        this.loading = false;
       });
     }
 
@@ -73,6 +75,7 @@ export class HomeComponent implements OnInit {
     this.jobSearchResult = this.jobs;
     this.selectedJob = this.jobs[0];
     this.paginationConfig.totalItems = this.jobSearchResult.length;
+    this.loading = false;
     this.createMetaData();
   }
 
@@ -154,6 +157,7 @@ export class HomeComponent implements OnInit {
   }
 
   search() {
+    this.loading = true;
     let matched = [];
     let locations = [...this.searchChips.location];
     let companies = [...this.searchChips.company];
@@ -194,6 +198,7 @@ export class HomeComponent implements OnInit {
       this.jobSearchResult = matched;
       this.paginationConfig.currentPage = (this.jobSearchResult.length && 1) || 0;
       this.paginationConfig.totalItems = this.jobSearchResult.length;
+      this.loading = false;
 
     }
 

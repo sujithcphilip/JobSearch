@@ -132,8 +132,9 @@
         </div>
 
     </div>
-    <div class="content" *ngIf="!jobSearchResult.length">
-        No jobs found.
+    <div class="content loading" *ngIf="!jobSearchResult.length">
+        <img src="/assets/loading.128.png" alt="Loading Icon" *ngIf="loading">
+        <span *ngIf="!loading">No jobs found.</span>
     </div>
 
 </div>
