@@ -217,7 +217,7 @@ export class HomeComponent implements OnInit {
           expFromMatch = (exp[0] >= this.searchChips.expFrom);
           expToMatch = (exp[0] <= this.searchChips.expTo);;
         } else if (exp.length == 2) {
-          expFromMatch = (exp[0] >= this.searchChips.expFrom);
+          expFromMatch = (this.searchChips.expFrom);
           expToMatch = (exp[1] <= this.searchChips.expTo);
         }
       }

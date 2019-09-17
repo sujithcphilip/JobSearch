@@ -11,7 +11,7 @@
             </div>
             <div class="selected">
                 <span class="chips badge badge-light chip-location" *ngFor="let chip of searchChips.location">
-                    {{ chip }} <span (click)="locationSelector.removeOption(chip)">&times;</span>
+                    {{ chip | ellipsis:27 }} <span (click)="locationSelector.removeOption(chip)">&times;</span>
                 </span>
             </div>
             <div [hidden]="!showLocationSelector">
@@ -28,7 +28,7 @@
             </div>
             <div class="selected">
                 <span class="chips badge badge-light chip-company" *ngFor="let chip of searchChips.company">
-                    {{ chip }} <span (click)="companySelector.removeOption(chip)">&times;</span>
+                    {{ chip | ellipsis:27 }} <span (click)="companySelector.removeOption(chip)">&times;</span>
                 </span>
             </div>
             <div [hidden]="!showCompanySelector">
@@ -45,7 +45,7 @@
             </div>
             <div class="selected">
                 <span class="chips badge badge-light chip-role" *ngFor="let chip of searchChips.skill">
-                    {{ chip }} <span (click)="skilSelector.removeOption(chip)">&times;</span>
+                    {{ chip | ellipsis:27 }} <span (click)="skilSelector.removeOption(chip)">&times;</span>
                 </span>
             </div>
             <div [hidden]="!showSkillSelector">
@@ -83,20 +83,20 @@
                         {{getLogo(job.companyname)}}
                     </div>
                     <div class="company-name">
-                        {{ (job.companyname | slice:0:40) + ((job.companyname.length > 40) ? "...":"") }}
+                        {{ job.companyname | ellipsis:40 }}
                     </div>
                 </div>
 
                 <div class="title">
-                    {{ (job.title | slice:0:40) + ((job.title.length > 40) ? "...":"") }}
+                    {{ job.title | ellipsis:40 }}
                 </div>
                 <div class="location">
-                    {{ (job.location | slice:0:30) + ((job.location.length > 30) ? "...":"") }}
+                        {{ job.companyname | ellipsis:30 }}
                 </div>
             </div>
             <div class="card-body">
                 <div class="skills" *ngIf="job.skills">
-                    {{ (job.skills | slice:0:40) + ((job.skills.length > 40) ? "...":"") }}
+                    {{ job.skills | ellipsis:40 }}
                 </div>
                 <div class="skills" *ngIf="!job.skills">
                     No Skills specified.

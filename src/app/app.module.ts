@@ -9,11 +9,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { MultiselectComponent } from './multiselect/multiselect.component';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from "ngx-pagination";
+import { EllipsisPipe } from './pipes/ellipsis.pipe';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    MultiselectComponent
+    MultiselectComponent,
+    EllipsisPipe
   ],
   imports: [
     BrowserModule,
