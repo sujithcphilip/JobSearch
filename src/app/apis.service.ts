@@ -6,7 +6,7 @@ import { Observable } from "rxjs"
 })
 export class ApisService {
 
-  DATA_URL = "https://nut-case.s3.amazonaws.com/jobs.json"; // for test use "assets/jobs.json";
+  DATA_URL = "/assets/jobs.json"; // for test use "assets/jobs.json";
   jobs: Array<any> = [];
   constructor(private http: HttpClient) { }
 
