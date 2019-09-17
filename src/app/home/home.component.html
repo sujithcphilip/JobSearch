@@ -55,16 +55,22 @@
             </div>
 
         </div>
+        <div class="search-exp-from">
+            <select name="exp-from" class="form-control exp-from" id="expFrom" [(ngModel)]="searchChips.expFrom">
+                <option value="-1" >Exp-Any</option>
+                <option value="{{i}}" *ngFor="let i of [0,1,2,3,4,5,6,7,8,9]">{{i}}</option>
+                
+            </select>
+        </div>
+        <div class="search-exp-to">
+                <select name="exp-to"  class="form-control exp-to" id="expTo" [(ngModel)]="searchChips.expTo">
+                        <option value="-1" >Exp-Any</option>
+                        <option [hidden]="searchChips.expFrom > i" value="{{i}}" *ngFor="let i of [0,1,2,3,4,5,6,7,8,9]">{{i}}</option>
+                        <option value="100" >10+</option>
+                    </select>
+        </div>
         <div class="search-button">
             <button class="btn btn-primary" (click)="search()">Search</button>
-        </div>
-        <div class="sort-job" id="sortJobs">
-            <select name="sortJobs" id="sortJobs" class="form-control">
-                <option value="a">a</option>
-                <option value="b">b</option>
-                <option value="c">c</option>
-            </select>
-
         </div>
     </div>
     <div class="content" *ngIf="jobSearchResult.length">
@@ -83,7 +89,7 @@
                     {{ (job.title | slice:0:40) + ((job.title.length > 40) ? "...":"") }}
                 </div>
                 <div class="location">
-                    {{job.location}}
+                    {{ (job.location | slice:0:30) + ((job.location.length > 30) ? "...":"") }}
                 </div>
             </div>
             <div class="card-body">
@@ -93,6 +99,9 @@
                 <div class="skills" *ngIf="!job.skills">
                     No Skills specified.
                 </div>
+                <div class="experience">
+                        {{job.experience}}
+                    </div>
                 <span class="endingJob chips chip-ending badge badge-light" *ngIf="isEnding(job.enddate).ending">
                     ending
                 </span>

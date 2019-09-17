@@ -23,12 +23,14 @@ export class HomeComponent implements OnInit {
   searchChips: any = {
     location: [],
     company: [],
-    skill: []
+    skill: [],
+    expFrom: -1,
+    expTo: -1
   };
   searchInputs: any = {
     location: "",
     company: "",
-    skill: ""
+    skill: "",
   };
 
   paginationConfig: any = {
@@ -143,10 +145,17 @@ export class HomeComponent implements OnInit {
       console.log(e);
     }
   }
-
+  /**
+   * Function to receive update from multiselect component
+   * @param chips selected items
+   * @param type type of items {location, company, skill}
+   */
   searchUpdate(chips, type) {
     this.searchChips[type] = chips;
   }
+  /**
+   * Alert user while attempting to select more than 5 items for search filter
+   */
   showMaxItemAlert() {
     clearTimeout(this.alertTimeout);
     this.alertTimeout = setTimeout(() => {
@@ -155,7 +164,9 @@ export class HomeComponent implements OnInit {
     this.showAlert = true;
 
   }
-
+  /**
+   * Search action implementation
+   */
   search() {
     this.loading = true;
     let matched = [];
@@ -167,6 +178,7 @@ export class HomeComponent implements OnInit {
       let locationMatch = !(locations.length > 0);
       let companyMatch = !(companies.length > 0);;
       let skillMatch = !(skills.length > 0);
+      
 
       for (let i = 0; i < locations.length; i++) {
         let chip = locations[i];
@@ -191,8 +203,25 @@ export class HomeComponent implements OnInit {
           break;
         }
       }
+      this.searchChips.expFrom = parseFloat(this.searchChips.expFrom);
+      this.searchChips.expTo = parseFloat(this.searchChips.expTo);
+      let expFromMatch = !(this.searchChips.expFrom > -1);
+      let expToMatch = !(this.searchChips.expTo > -1);
 
-      if (locationMatch && companyMatch && skillMatch) {
+      let exp: any = "" + job.experience;
+      exp = exp.replace(/[^0-9\-]/g, "");
+      exp = exp.split("-").filter(i => i.trim()).map(i => parseFloat(i));
+      if(exp[0] !== NaN) {
+        if(exp.length == 1) {
+          expFromMatch = (exp[0] >= this.searchChips.expFrom);
+          expToMatch = (exp[0] <= this.searchChips.expTo);;
+        } else if(exp.length == 2) {
+          expFromMatch = (exp[0] >= this.searchChips.expFrom);
+          expToMatch = (exp[1] <= this.searchChips.expTo);
+        }
+      }
+
+      if (locationMatch && companyMatch && skillMatch && expFromMatch && expToMatch) {
         matched.push(job);
       }
       this.jobSearchResult = matched;
