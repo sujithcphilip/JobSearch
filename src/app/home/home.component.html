@@ -57,17 +57,18 @@
         </div>
         <div class="search-exp-from">
             <select name="exp-from" class="form-control exp-from" id="expFrom" [(ngModel)]="searchChips.expFrom">
-                <option value="-1" >Exp-Any</option>
+                <option value="-1">Exp-Any</option>
                 <option value="{{i}}" *ngFor="let i of [0,1,2,3,4,5,6,7,8,9]">{{i}}</option>
-                
+
             </select>
         </div>
         <div class="search-exp-to">
-                <select name="exp-to"  class="form-control exp-to" id="expTo" [(ngModel)]="searchChips.expTo">
-                        <option value="-1" >Exp-Any</option>
-                        <option [hidden]="searchChips.expFrom > i" value="{{i}}" *ngFor="let i of [0,1,2,3,4,5,6,7,8,9]">{{i}}</option>
-                        <option value="100" >10+</option>
-                    </select>
+            <select name="exp-to" class="form-control exp-to" id="expTo" [(ngModel)]="searchChips.expTo">
+                <option value="-1">Exp-Any</option>
+                <option [hidden]="searchChips.expFrom > i" value="{{i}}" *ngFor="let i of [0,1,2,3,4,5,6,7,8,9]">{{i}}
+                </option>
+                <option value="100">10+</option>
+            </select>
         </div>
         <div class="search-button">
             <button class="btn btn-primary" (click)="search()">Search</button>
@@ -100,8 +101,8 @@
                     No Skills specified.
                 </div>
                 <div class="experience">
-                        {{job.experience}}
-                    </div>
+                    {{job.experience}}
+                </div>
                 <span class="endingJob chips chip-ending badge badge-light" *ngIf="isEnding(job.enddate).ending">
                     ending
                 </span>

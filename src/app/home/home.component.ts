@@ -178,7 +178,7 @@ export class HomeComponent implements OnInit {
       let locationMatch = !(locations.length > 0);
       let companyMatch = !(companies.length > 0);;
       let skillMatch = !(skills.length > 0);
-      
+
 
       for (let i = 0; i < locations.length; i++) {
         let chip = locations[i];
@@ -211,11 +211,11 @@ export class HomeComponent implements OnInit {
       let exp: any = "" + job.experience;
       exp = exp.replace(/[^0-9\-]/g, "");
       exp = exp.split("-").filter(i => i.trim()).map(i => parseFloat(i));
-      if(exp[0] !== NaN) {
-        if(exp.length == 1) {
+      if (exp[0] !== NaN) {
+        if (exp.length == 1) {
           expFromMatch = (exp[0] >= this.searchChips.expFrom);
           expToMatch = (exp[0] <= this.searchChips.expTo);;
-        } else if(exp.length == 2) {
+        } else if (exp.length == 2) {
           expFromMatch = (exp[0] >= this.searchChips.expFrom);
           expToMatch = (exp[1] <= this.searchChips.expTo);
         }

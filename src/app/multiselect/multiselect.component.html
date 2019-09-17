@@ -1,9 +1,10 @@
 <div class="outer">
-    <div  *ngIf="searchKey.trim()" (click)="toggle(searchKey.trim())" class="search-key">
-            <span>{{searchKey.trim() | titlecase}}</span> <span class="selected">{{ selected.has(searchKey.trim()) ? "&#x2713;":"+" }}</span>
+    <div *ngIf="searchKey.trim()" (click)="toggle(searchKey.trim())" class="search-key">
+        <span>{{searchKey.trim() | titlecase}}</span> <span
+            class="selected">{{ selected.has(searchKey.trim()) ? "&#x2713;":"+" }}</span>
     </div>
     <hr *ngIf="searchKey.trim()">
-    <ng-container *ngFor="let option of options;let i=index" >
+    <ng-container *ngFor="let option of options;let i=index">
         <div *ngIf="matchKey(option)" (click)="toggle(option)">
             <span *ngIf="selected.has(option)" class="selected">&#x2713;</span><span>{{option | titlecase}}</span>
             <hr>

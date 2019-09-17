@@ -11,7 +11,7 @@ export class MultiselectComponent implements OnInit {
   @Output() maxItems: EventEmitter<any> = new EventEmitter();
   selected: Set<string> = new Set<string>();
   @Input() searchKey: string = "";
-  
+
   constructor() { }
 
   ngOnInit() {
@@ -19,10 +19,10 @@ export class MultiselectComponent implements OnInit {
   }
   toggle(option) {
     option = option.toLowerCase();
-    if(this.selected.has(option)) {
+    if (this.selected.has(option)) {
       this.selected.delete(option)
     } else {
-      if(this.selected.size >= 5) {
+      if (this.selected.size >= 5) {
         this.maxItems.emit();
         return;
       }
@@ -31,7 +31,7 @@ export class MultiselectComponent implements OnInit {
     this.update.emit(this.selected);
   }
   matchKey(option: string) {
-    if(!!this.searchKey) {
+    if (!!this.searchKey) {
       let re = new RegExp("" + this.searchKey.toLowerCase())
       return !!option.toLowerCase().match(re);
     }
