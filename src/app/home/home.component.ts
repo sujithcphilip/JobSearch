@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     company: [],
     skill: [],
     expFrom: -1,
-    expTo: -1
+    expTo: 101
   };
   searchInputs: any = {
     location: "",
@@ -173,6 +173,9 @@ export class HomeComponent implements OnInit {
     let locations = [...this.searchChips.location];
     let companies = [...this.searchChips.company];
     let skills = [...this.searchChips.skill];
+    this.searchChips.expFrom = parseFloat(this.searchChips.expFrom);
+    this.searchChips.expTo = parseFloat(this.searchChips.expTo);
+    console.log(this.searchChips)
     for (let j = 0; j < this.jobs.length; j++) {
       let job = this.jobs[j];
       let locationMatch = !(locations.length > 0);
@@ -203,15 +206,13 @@ export class HomeComponent implements OnInit {
           break;
         }
       }
-      this.searchChips.expFrom = parseFloat(this.searchChips.expFrom);
-      this.searchChips.expTo = parseFloat(this.searchChips.expTo);
       let expFromMatch = !(this.searchChips.expFrom > -1);
-      let expToMatch = !(this.searchChips.expTo > -1);
+      let expToMatch = !(this.searchChips.expTo < 100);
 
       let exp: any = "" + job.experience;
       exp = exp.replace(/[^0-9\-]/g, "");
       exp = exp.split("-").filter(i => i.trim()).map(i => parseFloat(i));
-      if (exp[0] !== NaN) {
+      if (exp[0] !== NaN && (this.searchChips.expFrom > -1 || this.searchChips.expTo < 100)) {
         if (exp.length == 1) {
           expFromMatch = (exp[0] >= this.searchChips.expFrom);
           expToMatch = (exp[0] <= this.searchChips.expTo);;
@@ -224,13 +225,12 @@ export class HomeComponent implements OnInit {
       if (locationMatch && companyMatch && skillMatch && expFromMatch && expToMatch) {
         matched.push(job);
       }
-      this.jobSearchResult = matched;
-      this.paginationConfig.currentPage = (this.jobSearchResult.length && 1) || 0;
-      this.paginationConfig.totalItems = this.jobSearchResult.length;
-      this.loading = false;
 
     }
-
+    this.jobSearchResult = matched;
+    this.paginationConfig.currentPage = (this.jobSearchResult.length && 1) || 0;
+    this.paginationConfig.totalItems = this.jobSearchResult.length;
+    this.loading = false;
 
   }
 

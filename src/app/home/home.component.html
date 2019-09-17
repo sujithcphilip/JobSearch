@@ -64,7 +64,7 @@
         </div>
         <div class="search-exp-to">
             <select name="exp-to" class="form-control exp-to" id="expTo" [(ngModel)]="searchChips.expTo">
-                <option value="-1">Exp-Any</option>
+                <option value="101">Exp-Any</option>
                 <option [hidden]="searchChips.expFrom > i" value="{{i}}" *ngFor="let i of [0,1,2,3,4,5,6,7,8,9]">{{i}}
                 </option>
                 <option value="100">10+</option>
