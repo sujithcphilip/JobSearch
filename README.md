@@ -22,3 +22,4 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 5. Multiple options can be selected for search parameters (eg. multiple locations)
 6. Detailed job view modal UI.
 7. Uses remote endpoint for job data.
+8. Tags for old and expiring jobs
