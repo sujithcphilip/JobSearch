@@ -13,7 +13,7 @@ export class EllipsisPipe implements PipeTransform {
     if(value.length > maxLen) {
       val += suffix
     }
-    console.log(val)
+    //console.log(val)
     return val;
   }
 
