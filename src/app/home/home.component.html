@@ -58,7 +58,7 @@
         <div class="search-exp-from">
             <select name="exp-from" class="form-control exp-from" id="expFrom" [(ngModel)]="searchChips.expFrom">
                 <option value="-1">Min-Exp</option>
-                <option value="{{i}}" *ngFor="let i of [0,1,2,3,4,5,6,7,8,9]">{{i}}</option>
+                <option [hidden]="searchChips.expTo < i" value="{{i}}" *ngFor="let i of [0,1,2,3,4,5,6,7,8,9]">{{i}}</option>
 
             </select>
         </div>
