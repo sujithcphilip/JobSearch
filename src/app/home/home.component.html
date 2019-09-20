@@ -96,7 +96,7 @@
             </div>
             <div class="card-body">
                 <div class="skills" *ngIf="job.skills">
-                    {{ job.skills | ellipsis:40 }}
+                    {{ job.skills | ellipsis:25 }}
                 </div>
                 <div class="skills" *ngIf="!job.skills">
                     No Skills specified.

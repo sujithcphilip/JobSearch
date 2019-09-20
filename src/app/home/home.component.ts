@@ -210,8 +210,8 @@ export class HomeComponent implements OnInit {
       let expToMatch = !(this.searchChips.expTo < 100);
 
       let exp: any = "" + job.experience;
-      exp = exp.replace(/[^0-9\-]/g, "");
-      exp = exp.split("-").filter(i => i.trim()).map(i => parseFloat(i));
+      exp = exp.replace(/(to|To|TO)/g, "-").replace(/[^0-9\-]/g, "");
+      exp = exp.split("-").filter(i => i.trim().length).map(i => parseFloat(i));
       if (exp[0] !== NaN && (this.searchChips.expFrom > -1 || this.searchChips.expTo < 100)) {
         if (exp.length == 1) {
           expFromMatch = (exp[0] >= this.searchChips.expFrom);
