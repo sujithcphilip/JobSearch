@@ -1,16 +1,15 @@
 version: 0.2
 
 phases:
-install:
-  runtime-versions:
-    node: 12
-  commands:
-    - npm install
-    - npm run build
-    - zip -r build.zip dist/*
-build:
-  commands:
-    - echo Building...
+  install:
+    runtime-versions:
+      node: 12
+  build:
+    commands:
+      - echo Building...
+      - npm install
+      - npm run build
+      - zip -r build.zip dist/*
 artifacts:
   files:
     - './build.zip'
