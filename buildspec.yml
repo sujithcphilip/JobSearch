@@ -10,5 +10,6 @@ phases:
       - npm install
       - npm run build
 artifacts:
+  type: zip
   files:
-    - 'dist/ByjusJobSearchApp/*'
+    - 'dist/ByjusJobSearchApp/**/*'
