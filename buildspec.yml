@@ -10,6 +10,5 @@ phases:
       - npm install
       - npm run build
 artifacts:
-  type: zip
   files:
-    - 'dist'
+    - 'dist/**/*'
