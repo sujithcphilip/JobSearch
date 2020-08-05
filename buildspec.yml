@@ -9,7 +9,6 @@ phases:
       - echo Building...
       - npm install
       - npm run build
-      - zip -r build.zip dist/*
 artifacts:
   files:
-    - './build.zip'
+    - './dist/*'
